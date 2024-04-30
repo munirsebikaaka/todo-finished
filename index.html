@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .my-todo {
+        max-width: 1200px;
+        margin: 100px auto;
+      }
+      .todo-body {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+    </style>
+  </head>
+  <body>
+    <div class="my-todo">
+      <header class="todo-header">
+        <div id="input-cell">
+          <div>No todos Available</div>
+        </div>
+      </header>
+
+      <section class="todo-body">
+        <div>
+          <h2 class="my-heading">new todos</h2>
+          <ul id="newToDo">
+            <div>No todos Available</div>
+          </ul>
+        </div>
+        <div>
+          <h2 class="my-heading">Completed</h2>
+          <ul id="completed">
+            <div>No todos Available</div>
+          </ul>
+        </div>
+        <div>
+          <h2 class="my-heading">cancelled</h2>
+          <ul id="cancelled">
+            <div>No todos Available</div>
+          </ul>
+        </div>
+      </section>
+    </div>
+    <script src="script.js"></script>
+  </body>
+  <!-- 
+
+    const addBtb = (e) => {
+  e.preventDefault();
+  let todo = inputPlace.value;
+  todos.newTodos.push(todo);
+  newTodosID.innerHTML += `
+              <li>
+                <div class="todoHolder">${todo}</div>
+                <button  class="todos-btn" onclick="oncompleteHandler('${todo}', '${todoIDs.NEW})'">tic</button>
+                <button class="todo-btn">ex</button>
+              </li>
+  
+    `;
+};
+
+btnAddTodo.addEventListener("click", addBtb);
+
+function onCompleteHandler(todo, section) {
+  if (section === todoIDs.NEW) {
+    const index = todos.newTodos.indexOf(todo);
+    // if (index) {
+    //   document.getElementById("notodowrapper-new").classList.add("hidden");
+    // }
+    todos.newTodos.splice(index, 1);
+    // updateDomWithNewArray(todos.newTodos, todoIDs.NEW);
+    // if (todos.newTodos.length < 1) {
+    //   document.getElementById(todoIDs.NEW).innerHTML =
+    //     '<li class="notodo-wrapper" id="notodowrapper-new">No Todos Available</li>';
+    // }
+    todos.comletedTodos.push(todo);
+    // updateDomWithNewArray(todos.completed, todoIDs.COMPLETED);
+  } else if (section === todoIDs.COMPLETED) {
+    const index = todos.completed.indexOf(todo);
+    todos.completed.splice(index, 1);
+    // updateDomWithNewArray(todos.completed, todoIDs.COMPLETED);
+    // if (todos.completed.length < 1) {
+    //   document.getElementById(todoIDs.COMPLETED).innerHTML =
+    //     '<li class="notodo-wrapper" id="notodowrapper-completed">No Todos Available</li>';
+    // }
+    todos.cancelled.push(todo);
+    // updateDomWithNewArray(todos.cancelled, todoIDs.CANCELLED);
+  } else if (section === todoIDs.CANCELLED) {
+    const index = todos.cancelled.indexOf(todo);
+    todos.cancelled.splice(index, 1);
+    // updateDomWithNewArray(todos.cancelled, todoIDs.CANCELLED);
+    // if (todos.completed.length < 1) {
+    //   document.getElementById(todoIDs.CANCELLED).innerHTML =
+    //     '<li class="notodo-wrapper" id="notodowrapper-cancelled">No Todos Available</li>';
+    // }
+    todos.newTodos.push(todo);
+    // updateDomWithNewArray(todos.newTodos, todoIDs.NEW);
+  }
+}
+
+
+document.getElementById("input-cell").innerHTML = `
+          <form class="input-todo-form">
+            <input type="text" id="input-todos" placeholder="add todos" />
+            <button id="input-todos-btn" type="submit">add</button>
+          </form>
+`;
+
+const getIputValue = () => {
+  const inputHolder = document.getElementById("input-todos");
+  const todo = inputHolder.value;
+  todos.newTodos.push(todo);
+  newTodosID.innerHTML += `
+            <li>
+              <div class="todoHolder">${todo}</div>
+              <div>
+               <button class="todo-btn" onclick = "onCompleteHandler('${todo}', '${TODOs.NEW}')"
+               >tic</button>
+               <button class="todo-btn">ex</button>
+              </div>
+            </li>`;
+};
+document.querySelector(".try").addEventListener("click", getIputValue);
+// function updateUI(currentArray, ul) {
+//   const ulElment = document.getElementById(ul);
+//   // ulElment.innerHTML = "";
+//   currentArray.forEach((el) => {
+//     ulElment.innerHTML += `
+//             <li>
+//               <div class="todoHolder">${el}</div>
+//               <div>
+//                <button class="todo-btn" onclick = "onCompleteTodos('${el}', '${ul}')"
+//                >tic</button>
+//                <button class="todo-btn">ex</button>
+//               </div>
+//             </li>
+//     `;
+//   });
+// }
+
+// function updateUI(todoArray, ul) {
+//   const ulElement = document.getElementById(ul);
+//   ulElement.innerHTML = "";
+//   todoArray.forEach((el) => {
+//     ulElement.innerHTML += `
+//     <li class="list-item">
+//                 <div class="list-item-title">${el}</div>
+//                 <div class="list-item-actions">
+//                   <button class="btn btn-1" onClick="onCompleteHandler('${el}', '${ul}')">tik
+//                   </button>
+//                   <button class="btn btn-2">ex</button>
+//                 </div>
+//     </li>
+//     `;
+//   });
+//   console.log(todoArray, ul);
+// }
+
+// const onCompleteTodos = (todo, section) => {
+//   if (section === todoIDs.NEW) {
+//     const index = todos.newTodos.indexOf(todo);
+//     todos.newTodos.splice(index, 1);
+//     updateUI(todos.newTodos, todoIDs.NEW);
+//     todos.completedTodos.push(todo);
+//     updateUI(todos.completedTodos, todoIDs.COMPLETED);
+//     console.log(todos.completedTodos);
+//   }
+// };
+
+// function updateDomWithNewArray(todoArray, ul) {
+//   const ulElement = document.getElementById(ul);
+//   ulElement.innerHTML = "";
+//   todoArray.forEach((todo) => {
+//     ulElement.innerHTML += `
+//     <li class="list-item">
+//                 <div class="list-item-title">${todo}</div>
+//                 <div class="list-item-actions">
+//                   <button class="btn btn-1" onClick="onCompleteHandler('${todo}', '${ul}')">
+//                     <ion-icon name="checkmark-outline"></ion-icon>
+//                   </button>
+//                   <button class="btn btn-2" onClick="onCancelHandler('${todo}', '${ul}')">
+//                     <ion-icon name="close-outline"></ion-icon>
+//                   </button>
+//                 </div>
+//     </li>
+//     `;
+//     console.log(todo);
+//   });
+//   console.log(todoArray, ul);
+// }
+// function x(arr, section) {
+//   const element = document.getElementById(section);
+//   section.innerHTML = "";
+//   arr.forEach((el) => {
+//     element.innerHTML += `
+//     <li>
+//               <div class="todoHolder">${el}</div>
+//               <div>
+//                <button class="todo-btn" onclick = "onCompleteHandler('${el}', '${section}')"
+//                >tic</button>
+//                <button class="todo-btn">ex</button>
+//               </div>
+//             </li>
+//     `;
+//   });
+// }
+// function onCompleteHandler(todo, section) {
+//   if (section === todoIDs.NEW) {
+//     const index = todos.newTodos.indexOf(todo);
+//     //   if (index) {
+//     //     document.getElementById("notodowrapper-new").classList.add("hidden");
+//     //   }
+//     todos.newTodos.splice(index, 1);
+//     x(todos.newTodos, todoIDs.NEW);
+//     //   if (todos.newTodos.length < 1) {
+//     //     document.getElementById(TODOs.NEW).innerHTML =
+//     //       '<li class="notodo-wrapper" id="notodowrapper-new">No Todos Available</li>';
+//     //   }
+//     todos.completedTodos.push(todo);
+//     x(todos.newTodos, todoIDs.COMPLETED);
+//     console.log(todos.completedTodos);
+//   }
+// }
+
+function updateDomWithNewArray(todoArray, ul) {
+  const ulElement = document.getElementById(ul);
+  ulElement.innerHTML = "";
+  todoArray.forEach((todo) => {
+    ulElement.innerHTML += `
+    <li class="list-item">
+                <div class="list-item-title">${todo}</div>
+                <div class="list-item-actions">
+                  <button class="btn btn-1" onClick="onCompleteHandler('${todo}', '${ul}')">
+                    <ion-icon name="checkmark-outline"></ion-icon>
+                  </button>
+                  <button class="btn btn-2" onClick="onCancelHandler('${todo}', '${ul}')">
+                    <ion-icon name="close-outline"></ion-icon>
+                  </button>
+                </div>
+    </li>
+    `;
+  });
+  console.log(todoArray, ul);
+}
+
+function onCompleteHandler(todo, section) {
+  if (section === TODOs.NEW) {
+    const index = todos.newTodos.indexOf(todo);
+    //   if (index) {
+    //     document.getElementById("notodowrapper-new").classList.add("hidden");
+    //   }
+    todos.newTodos.splice(index, 1);
+    updateDomWithNewArray(todos.newTodos, TODOs.NEW);
+    //   if (todos.newTodos.length < 1) {
+    //     document.getElementById(TODOs.NEW).innerHTML =
+    //       '<li class="notodo-wrapper" id="notodowrapper-new">No Todos Available</li>';
+    //   }
+    todos.completedTodos.push(todo);
+    updateDomWithNewArray(todos.completed, TODOs.COMPLETED);
+    // } else if (section === TODOs.COMPLETED) {
+    //   const index = todos.completed.indexOf(todo);
+    //   todos.completed.splice(index, 1);
+    //   updateDomWithNewArray(todos.completed, TODOs.COMPLETED);
+    //   if (todos.completed.length < 1) {
+    //     document.getElementById(TODOs.COMPLETED).innerHTML =
+    //       '<li class="notodo-wrapper" id="notodowrapper-completed">No Todos Available</li>';
+    //   }
+    //   todos.cancelled.push(todo);
+    //   updateDomWithNewArray(todos.cancelled, TODOs.CANCELLED);
+    // } else if (section === TODOs.CANCELLED) {
+    //   const index = todos.cancelled.indexOf(todo);
+    //   todos.cancelled.splice(index, 1);
+    //   updateDomWithNewArray(todos.cancelled, TODOs.CANCELLED);
+    //   if (todos.completed.length < 1) {
+    //     document.getElementById(TODOs.CANCELLED).innerHTML =
+    //       '<li class="notodo-wrapper" id="notodowrapper-cancelled">No Todos Available</li>';
+    //   }
+    //   todos.newTodos.push(todo);
+    //   updateDomWithNewArray(todos.newTodos, TODOs.NEW);
+  }
+}
+
+   -->
+</html>
