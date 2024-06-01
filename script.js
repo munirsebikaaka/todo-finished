@@ -16,17 +16,22 @@ const todos = {
   completed: [],
   cancelled: [],
 };
-document.getElementById("input-cell").innerHTML = `
-<form id="newTodoForm" class='todo-form'">
-<input type="text" class='type-input' id="toInput"  placeholder="Add to do" />
-<button class="todobtn" id="newTodoBtn" type="submit">Add</button>
-</form>
-`;
+const speakBtn = document.querySelector("#newTodoBtn");
 
+function speakSO(caller) {
+  const speaked = new SpeechSynthesisUtterance(caller);
+  speechSynthesis.speak(speaked);
+  console.log("called");
+}
+speakBtn.addEventListener("click", function () {
+  const toInput = document.getElementById("toInput").value;
+  speakSO(toInput);
+});
 function onSubmitHandler(e) {
   e.preventDefault();
   const todoInput = document.getElementById("toInput");
   const todo = todoInput.value;
+
   todos.newTodos.push(todo);
   newTodosIdUl.innerHTML += `
   <li class="list-item">
@@ -39,6 +44,16 @@ ex                  </button>
                 </div>
     </li>
   `;
+  document.querySelector(".btn-1").addEventListener("click", function () {
+    const speakThis = `you are going to ${todo}`;
+    const proSound = new SpeechSynthesisUtterance(speakThis);
+    speechSynthesis.speak(proSound);
+  });
+  document.querySelector(".btn-2").addEventListener("click", function () {
+    const speakThis = `you have cancelled  ${todo}`;
+    const proSound = new SpeechSynthesisUtterance(speakThis);
+    speechSynthesis.speak(proSound);
+  });
 }
 
 document
